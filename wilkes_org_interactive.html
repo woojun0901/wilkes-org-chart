@@ -1,222 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.5">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilkes Org Chart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .node {
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px;
+            width: 200px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Wilkes University Academic Structure&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>body { font-family: Arial, sans-serif; margin: 0; padding: 0; background:#f5f7fa; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>header { background:#003B5C; color:white; padding:16px 24px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>h1 { margin:0; font-size:24px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>main { padding:20px 24px 40px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.container { max-width:1200px; margin:0 auto; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.controls { margin-bottom:16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button { background:#003B5C; color:white; border:none; padding:8px 14px; border-radius:4px; cursor:pointer; font-size:14px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button.secondary { background:#FDB71A; color:#003B5C; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>button:disabled { opacity:0.6; cursor:default; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.legend { font-size:13px; color:#333; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.legend span { display:inline-block; margin-right:16px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.swatch { width:12px; height:12px; display:inline-block; margin-right:4px; border-radius:2px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.tree { list-style:none; padding-left:0; margin:0; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.node { margin:4px 0; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.label { display:inline-block; padding:6px 10px; border-radius:4px; background:white; border:1px solid #d0d7e2; cursor:pointer; font-size:14px; transition:background 0.15s, transform 0.1s, box-shadow 0.15s; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.label:hover { background:#eef3fb; box-shadow:0 1px 3px rgba(0,0,0,0.15); transform:translateY(-1px); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.level-university .label { background:#003B5C; color:white; border-color:#003B5C; font-weight:bold; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.level-college .label { background:#e8f0fa; border-color:#003B5C; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.college-steam .label { border-left:4px solid #FDB71A; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.college-health .label { border-left:4px solid #009688; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.level-school .label { background:white; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.level-area .label { background:#fafafa; font-size:13px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.level-dept .label { background:#ffffff; font-size:12px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.children { margin-left:24px; margin-top:4px; border-left:1px dashed #c3cedd; padding-left:16px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hidden { display:none; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.path { font-size:13px; color:#555; margin-bottom:8px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.path strong { color:#003B5C; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>@media (max-width:700px) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>main { padding:16px; }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>.children { margin-left:16px; padding-left:10px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;h1&gt;Wilkes University Academic Structure&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div style="font-size:13px; opacity:0.9; margin-top:4px;"&gt;Interactive hierarchy &amp;mdash; click boxes to expand or collapse details.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/header&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;main&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="controls"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="expandAll"&gt;Expand all&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="collapseAll" class="secondary"&gt;Collapse to colleges&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="legend"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;&lt;span class="swatch" style="background:#003B5C;"&gt;&lt;/span&gt;Wilkes University&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;&lt;span class="swatch" style="background:#FDB71A;"&gt;&lt;/span&gt;College of STEAM&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span&gt;&lt;span class="swatch" style="background:#009688;"&gt;&lt;/span&gt;College of Health &amp;amp; Education&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="path" id="path"&gt;Current selection: &lt;strong&gt;Wilkes University&lt;/strong&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;ul class="tree"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;li class="node level-university" data-id="u" data-label="Wilkes University"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;span class="label"&gt;Wilkes University&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;ul class="children"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li class="node level-college college-steam" data-id="c-steam" data-label="College of STEAM"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;span class="label"&gt;College of STEAM&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;ul class="children"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;li class="node level-school" data-id="s-eng" data-label="School of Engineering"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;span class="label"&gt;School of Engineering&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;ul class="children"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-dept" data-label="All Engineering Programs"&gt;&lt;span class="label"&gt;All Engineering Programs&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-dept" data-label="Math"&gt;&lt;span class="label"&gt;Math&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-dept" data-label="Physics"&gt;&lt;span class="label"&gt;Physics&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-dept" data-label="Computer Science"&gt;&lt;span class="label"&gt;Computer Science&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-dept" data-label="Cloud Computing"&gt;&lt;span class="label"&gt;Cloud Computing&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-dept" data-label="Data Science"&gt;&lt;span class="label"&gt;Data Science&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;li class="node level-school" data-id="s-sidhu" data-label="Sidhu School of Business"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;span class="label"&gt;Sidhu School of Business&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;ul class="children"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-dept" data-label="All Business Programs"&gt;&lt;span class="label"&gt;All Business Programs&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-dept" data-label="Digital Design &amp;amp; Media Art"&gt;&lt;span class="label"&gt;Digital Design &amp;amp; Media Art&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-dept" data-label="Communications &amp;amp; Media"&gt;&lt;span class="label"&gt;Communications &amp;amp; Media&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-dept" data-label="International Relations"&gt;&lt;span class="label"&gt;International Relations&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;li class="node level-school" data-id="s-arts" data-label="Division of Arts"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;span class="label"&gt;Division of Arts&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;ul class="children"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-dept" data-label="Musical Theater"&gt;&lt;span class="label"&gt;Musical Theater&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-dept" data-label="Theater Arts"&gt;&lt;span class="label"&gt;Theater Arts&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-dept" data-label="Theater Design and Technology"&gt;&lt;span class="label"&gt;Theater Design and Technology&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-dept" data-label="Art &amp;amp; Music (Gen Eds)"&gt;&lt;span class="label"&gt;Art &amp;amp; Music (Gen Eds)&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li class="node level-college college-health" data-id="c-health" data-label="College of Health and Education"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;span class="label"&gt;College of Health and Education&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;ul class="children"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;li class="node level-school" data-id="s-nursing" data-label="School of Nursing"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;span class="label"&gt;School of Nursing&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;li class="node level-school" data-id="s-pharm" data-label="School of Pharmacy"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;span class="label"&gt;School of Pharmacy&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;li class="node level-school" data-id="s-edu" data-label="School of Education"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;span class="label"&gt;School of Education&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;li class="node level-school" data-id="s-gs" data-label="School of General Studies (Working Title)"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;span class="label"&gt;School of General Studies (Working Title)&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;ul class="children"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-area" data-label="Humanities"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;span class="label"&gt;Humanities&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;ul class="children"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="History"&gt;&lt;span class="label"&gt;History&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Philosophy"&gt;&lt;span class="label"&gt;Philosophy&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Spanish"&gt;&lt;span class="label"&gt;Spanish&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="English"&gt;&lt;span class="label"&gt;English&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-area" data-label="Social Sciences"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;span class="label"&gt;Social Sciences&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;ul class="children"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Criminology"&gt;&lt;span class="label"&gt;Criminology&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Political Science"&gt;&lt;span class="label"&gt;Political Science&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Psychology"&gt;&lt;span class="label"&gt;Psychology&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Sociology"&gt;&lt;span class="label"&gt;Sociology&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;li class="node level-area" data-label="Natural Sciences (Strategic Growth Area)"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;span class="label"&gt;Natural Sciences (Strategic Growth Area)&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;ul class="children"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Biology"&gt;&lt;span class="label"&gt;Biology&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Earth &amp;amp; Environmental Science"&gt;&lt;span class="label"&gt;Earth &amp;amp; Environmental Science&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Environmental Science"&gt;&lt;span class="label"&gt;Environmental Science&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Environmental Studies"&gt;&lt;span class="label"&gt;Environmental Studies&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Geology"&gt;&lt;span class="label"&gt;Geology&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Medical Laboratory Science"&gt;&lt;span class="label"&gt;Medical Laboratory Science&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Biochemistry"&gt;&lt;span class="label"&gt;Biochemistry&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Cannabis Chemistry"&gt;&lt;span class="label"&gt;Cannabis Chemistry&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li class="node level-dept" data-label="Chemistry"&gt;&lt;span class="label"&gt;Chemistry&lt;/span&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                      </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                  </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/main&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function updatePath(node) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const pathEl = document.getElementById('path');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const labels = [];</p>
-<p class="p1"><span class="Apple-converted-space">      </span>let current = node;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>while (current &amp;&amp; current.classList &amp;&amp; current.classList.contains('node')) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const lbl = current.getAttribute('data-label');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (lbl) labels.unshift(lbl);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>current = current.parentElement.closest('.node');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!labels.length) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>pathEl.innerHTML = 'Current selection: &lt;strong&gt;Wilkes University&lt;/strong&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>pathEl.innerHTML = 'Current selection: &lt;strong&gt;' + labels.join(' \\ ') + '&lt;/strong&gt;';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function toggleNode(node) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const children = node.querySelector(':scope &gt; .children');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!children) return;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>children.classList.toggle('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>updatePath(node);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.addEventListener('click', function(e) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const label = e.target.closest('.label');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!label) return;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const node = label.parentElement;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!node.classList.contains('node')) return;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>toggleNode(node);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function setAll(expand) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.querySelectorAll('.children').forEach(ch =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if (expand) {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>ch.classList.remove('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>ch.classList.add('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const uni = document.querySelector('.level-university .children');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (uni) uni.classList.remove('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.querySelectorAll('.level-college .children').forEach(ch =&gt; ch.classList.remove('hidden'));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const root = document.querySelector('.level-university');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (root) updatePath(root);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('expandAll').addEventListener('click', function() { setAll(true); });</p>
-<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('collapseAll').addEventListener('click', function() { setAll(false); });</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>setAll(false);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <h1>Wilkes Organization Chart</h1>
+    <div class="org-chart">
+        <div class="node">CEO</div>
+        <div class="node">CTO</div>
+        <div class="node">CFO</div>
+        <div class="node">COO</div>
+    </div>
 </body>
 </html>
